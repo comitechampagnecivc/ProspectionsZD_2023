@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         #map {
-            width: 1155px;
+            width: 1255px;
             height: 879px;
         }
         </style>
@@ -54,7 +54,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[48.212674309708994,2.63907733119856],[49.30065765413307,4.798542507805088]]);
+        }).fitBounds([[48.50581855075753,2.672788672512157],[49.597056122822266,5.032986539287629]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -125,7 +125,7 @@
                 lineJoin: 'bevel',
                 weight: 1,
                 fillOpacity: 0,
-                interactive: true,
+                interactive: false,
             }
         }
         map.createPane('pane_POLYGON_Communes_viticoles_AOC_Champagne_1');
@@ -133,7 +133,7 @@
         map.getPane('pane_POLYGON_Communes_viticoles_AOC_Champagne_1').style['mix-blend-mode'] = 'normal';
         var layer_POLYGON_Communes_viticoles_AOC_Champagne_1 = new L.geoJson(json_POLYGON_Communes_viticoles_AOC_Champagne_1, {
             attribution: '',
-            interactive: true,
+            interactive: false,
             dataVar: 'json_POLYGON_Communes_viticoles_AOC_Champagne_1',
             layerName: 'layer_POLYGON_Communes_viticoles_AOC_Champagne_1',
             pane: 'pane_POLYGON_Communes_viticoles_AOC_Champagne_1',
@@ -153,34 +153,10 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>Commune</strong><br />' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['aoc_petite'] !== null ? autolinker.link(feature.properties['aoc_petite'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['aoc_dept'] !== null ? autolinker.link(feature.properties['aoc_dept'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['aoc_region'] !== null ? autolinker.link(feature.properties['aoc_region'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['insee'] !== null ? autolinker.link(feature.properties['insee'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['surface_ha'] !== null ? autolinker.link(feature.properties['surface_ha'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Num_ZD'] !== null ? autolinker.link(feature.properties['Num_ZD'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Nom_ZD2022'] !== null ? autolinker.link(feature.properties['Nom_ZD2022'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Date_prosp'] !== null ? autolinker.link(feature.properties['Date_prosp'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -224,7 +200,7 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2"><strong>nom</strong><br />' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Date_props'] !== null ? autolinker.link(feature.properties['Date_props'].toLocaleString()) : '') + '</td>\
@@ -391,7 +367,7 @@
                 interactive: true,
             }
                     break;
-                case 'NULL':
+                default:
                     return {
                 pane: 'pane_2023_ZD_REUIL_DemiJ_4',
                 opacity: 1,
