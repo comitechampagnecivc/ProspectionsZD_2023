@@ -15,7 +15,7 @@
             height: 879px;
         }
         </style>
-        <title>Campagne prospections 2023 - Planning prévisionnel</title>
+        <title>Campagne prospections obligatoires 2023 - Planning prévisionnel</title>
     </head>
     <body>
         <div id="map">
@@ -52,8 +52,8 @@
             }
         }
         var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        }).fitBounds([[48.63913814800948,2.7303767575049522],[49.28525640815792,4.1296157096333586]]);
+            zoomControl:true, maxZoom:28, minZoom:9
+        }).fitBounds([[48.24104799839007,2.7734616009158146],[49.278423558291166,5.001764756911392]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -66,7 +66,7 @@
             pane: 'pane_GoogleSatellite_0',
             opacity: 1.0,
             attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
-            minZoom: 1,
+            minZoom: 9,
             maxZoom: 28,
             minNativeZoom: 0,
             maxNativeZoom: 20
@@ -84,10 +84,16 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>Commune</strong><br />' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Date_prosp'] !== null ? autolinker.link(feature.properties['Date_prosp'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['demi-journ'] !== null ? autolinker.link(feature.properties['demi-journ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -131,10 +137,13 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>nom</strong><br />' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date_props'] !== null ? autolinker.link(feature.properties['Date_props'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['demi-J'] !== null ? autolinker.link(feature.properties['demi-J'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -168,7 +177,7 @@
                 interactive: true,
             }
                     break;
-                case 'TRELOU_CHASSINS':
+                case 'TRELOU (Chassins)':
                     return {
                 pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
                 opacity: 1,
@@ -181,7 +190,7 @@
                 interactive: true,
             }
                     break;
-                case 'TRELOU_PASSY':
+                case 'TRELOU - PASSY':
                     return {
                 pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
                 opacity: 1,
@@ -194,7 +203,7 @@
                 interactive: true,
             }
                     break;
-                case 'TRELOU (VILLAGE)':
+                case 'TRELOU (Village)':
                     return {
                 pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
                 opacity: 1,
@@ -234,11 +243,13 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">PLO</th>\
-                        <td>' + (feature.properties['PLO'] !== null ? autolinker.link(feature.properties['PLO'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['PLO'] !== null ? autolinker.link(feature.properties['PLO'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date_prosp'] !== null ? autolinker.link(feature.properties['Date_prosp'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['Demi-J'] !== null ? autolinker.link(feature.properties['Demi-J'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -246,7 +257,7 @@
 
         function style_2023_ZD_REUIL_DemiJ_3_0(feature) {
             switch(String(feature.properties['PLO'])) {
-                case 'BINSON_VILLERS':
+                case 'BINSON - VILLERS':
                     return {
                 pane: 'pane_2023_ZD_REUIL_DemiJ_3',
                 opacity: 1,
@@ -285,7 +296,7 @@
                 interactive: true,
             }
                     break;
-                case 'REUIL _ ECHELLE':
+                case 'REUIL (Echelle)':
                     return {
                 pane: 'pane_2023_ZD_REUIL_DemiJ_3',
                 opacity: 1,
@@ -328,7 +339,10 @@
                         <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date_prosp'] !== null ? autolinker.link(feature.properties['Date_prosp'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['demi_J'] !== null ? autolinker.link(feature.properties['demi_J'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -336,7 +350,7 @@
 
         function style_2023_ZD_DORMANS_DemiJ_4_0(feature) {
             switch(String(feature.properties['nom'])) {
-                case 'DORMANS_SOILLY_CHAVENAY':
+                case 'DORMANS - CHAVENAY':
                     return {
                 pane: 'pane_2023_ZD_DORMANS_DemiJ_4',
                 opacity: 1,
@@ -349,11 +363,11 @@
                 interactive: true,
             }
                     break;
-                case 'DORMANS_VASSIEUX_VASSY_TRY':
+                case 'DORMANS-VASSIEUX-VASSY-TRY':
                     return {
                 pane: 'pane_2023_ZD_DORMANS_DemiJ_4',
                 opacity: 1,
-                color: 'rgba(194,124,244,1.0)',
+                color: 'rgba(207,229,11,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -362,11 +376,11 @@
                 interactive: true,
             }
                     break;
-                case 'COURTHIEZY_SOILLY':
+                case 'COURTHIEZY - SOILLY':
                     return {
                 pane: 'pane_2023_ZD_DORMANS_DemiJ_4',
                 opacity: 1,
-                color: 'rgba(244,106,60,1.0)',
+                color: 'rgba(244,184,43,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -402,10 +416,13 @@
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2"><strong>nom</strong><br />' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Demi-jour'] !== null ? autolinker.link(feature.properties['Demi-jour'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -413,7 +430,7 @@
 
         function style_2023_ZD_CdB_DemiJ_5_0(feature) {
             switch(String(feature.properties['nom'])) {
-                case 'CHOUILLY_BUTTE':
+                case 'CHOUILLY (Butte de Saran)':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -426,7 +443,7 @@
                 interactive: true,
             }
                     break;
-                case 'CHOUILLY_OIRY':
+                case 'CHOUILLY - OIRY':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -439,7 +456,7 @@
                 interactive: true,
             }
                     break;
-                case 'CHOUILLY_MONTAIGU':
+                case 'CHOUILLY (Montaigu)':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -452,7 +469,7 @@
                 interactive: true,
             }
                     break;
-                case 'CHOUILLY_VILLAGE_PLUMECOQ':
+                case 'CHOUILLY (Village + Plumecoq)':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -465,7 +482,7 @@
                 interactive: true,
             }
                     break;
-                case 'CRAMANT_OIRY':
+                case 'CRAMANT - OIRY':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -478,7 +495,7 @@
                 interactive: true,
             }
                     break;
-                case 'CRAMANT_VILLAGE':
+                case 'CRAMANT (Village)':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -491,7 +508,7 @@
                 interactive: true,
             }
                     break;
-                case 'CUIS_CRAMANT':
+                case 'CUIS - CRAMANT':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -504,7 +521,7 @@
                 interactive: true,
             }
                     break;
-                case 'CUIS_GRAUVES_MANCY':
+                case 'CUIS-GRAUVES-MANCY':
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
@@ -534,15 +551,15 @@
         bounds_group.addLayer(layer_2023_ZD_CdB_DemiJ_5);
         map.addLayer(layer_2023_ZD_CdB_DemiJ_5);
         map.on("zoomend", function(e) {
-            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 9) {
                 map.addLayer(layer_GoogleSatellite_0);
-            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+            } else if (map.getZoom() > 19 || map.getZoom() < 9) {
                 map.removeLayer(layer_GoogleSatellite_0);
             }
         });
-            if (map.getZoom() <= 19 && map.getZoom() >= 8) {
+            if (map.getZoom() <= 19 && map.getZoom() >= 9) {
                 map.addLayer(layer_GoogleSatellite_0);
-            } else if (map.getZoom() > 19 || map.getZoom() < 8) {
+            } else if (map.getZoom() > 19 || map.getZoom() < 9) {
                 map.removeLayer(layer_GoogleSatellite_0);
             }
             var title = new L.Control();
@@ -552,7 +569,7 @@
                 return this._div;
             };
             title.update = function () {
-                this._div.innerHTML = '<h2>Campagne prospections 2023 - Planning prévisionnel</h2>';
+                this._div.innerHTML = '<h2>Campagne prospections obligatoires 2023 - Planning prévisionnel</h2>';
             };
             title.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
