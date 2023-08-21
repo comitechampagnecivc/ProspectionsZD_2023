@@ -11,17 +11,18 @@
         <link rel="stylesheet" href="css/leaflet-control-geocoder.Geocoder.css">
         <style>
         #map {
-            width: 1255px;
+            width: 1146px;
             height: 879px;
         }
         </style>
-        <title>Campagne prospections obligatoires 2023 - Planning prévisionnel</title>
+        <title>Prospections obligatoires ZD 2023 - Planning arrêté au 18 août</title>
     </head>
     <body>
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
         <script src="js/leaflet.rotatedMarker.js"></script>
         <script src="js/leaflet.pattern.js"></script>
         <script src="js/leaflet-hash.js"></script>
@@ -30,11 +31,13 @@
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
         <script src="js/leaflet-control-geocoder.Geocoder.js"></script>
-        <script src="data/2023_Communes_1demiJ_1.js"></script>
-        <script src="data/2023_ZD_TRELOU_DemiJ_2.js"></script>
+        <script src="data/POLYGON_Communes_viticoles_AOC_Champagne_1.js"></script>
+        <script src="data/2023_Communes_1demiJ_2.js"></script>
         <script src="data/2023_ZD_REUIL_DemiJ_3.js"></script>
         <script src="data/2023_ZD_DORMANS_DemiJ_4.js"></script>
         <script src="data/2023_ZD_CdB_DemiJ_5.js"></script>
+        <script src="data/2023_ZD_TRELOU_DemiJ_6.js"></script>
+        <script src="data/Point_RDV_ZD_2023_7.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -53,7 +56,7 @@
         }
         var map = L.map('map', {
             zoomControl:true, maxZoom:28, minZoom:9
-        }).fitBounds([[48.24104799839007,2.7734616009158146],[49.278423558291166,5.001764756911392]]);
+        }).fitBounds([[48.99617403290816,3.4256969784337143],[49.148660087479165,3.7272764320880434]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -73,7 +76,50 @@
         });
         layer_GoogleSatellite_0;
         map.addLayer(layer_GoogleSatellite_0);
-        function pop_2023_Communes_1demiJ_1(feature, layer) {
+        function pop_POLYGON_Communes_viticoles_AOC_Champagne_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['aoc_nom'] !== null ? autolinker.link(feature.properties['aoc_nom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_POLYGON_Communes_viticoles_AOC_Champagne_1_0() {
+            return {
+                pane: 'pane_POLYGON_Communes_viticoles_AOC_Champagne_1',
+                opacity: 1,
+                color: 'rgba(128,128,128,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_POLYGON_Communes_viticoles_AOC_Champagne_1');
+        map.getPane('pane_POLYGON_Communes_viticoles_AOC_Champagne_1').style.zIndex = 401;
+        map.getPane('pane_POLYGON_Communes_viticoles_AOC_Champagne_1').style['mix-blend-mode'] = 'normal';
+        var layer_POLYGON_Communes_viticoles_AOC_Champagne_1 = new L.geoJson(json_POLYGON_Communes_viticoles_AOC_Champagne_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_POLYGON_Communes_viticoles_AOC_Champagne_1',
+            layerName: 'layer_POLYGON_Communes_viticoles_AOC_Champagne_1',
+            pane: 'pane_POLYGON_Communes_viticoles_AOC_Champagne_1',
+            onEachFeature: pop_POLYGON_Communes_viticoles_AOC_Champagne_1,
+            style: style_POLYGON_Communes_viticoles_AOC_Champagne_1_0,
+        });
+        bounds_group.addLayer(layer_POLYGON_Communes_viticoles_AOC_Champagne_1);
+        function pop_2023_Communes_1demiJ_2(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -96,9 +142,9 @@
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_2023_Communes_1demiJ_1_0() {
+        function style_2023_Communes_1demiJ_2_0() {
             return {
-                pane: 'pane_2023_Communes_1demiJ_1',
+                pane: 'pane_2023_Communes_1demiJ_2',
                 opacity: 1,
                 color: 'rgba(244,172,47,1.0)',
                 dashArray: '',
@@ -109,126 +155,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_2023_Communes_1demiJ_1');
-        map.getPane('pane_2023_Communes_1demiJ_1').style.zIndex = 401;
-        map.getPane('pane_2023_Communes_1demiJ_1').style['mix-blend-mode'] = 'normal';
-        var layer_2023_Communes_1demiJ_1 = new L.geoJson(json_2023_Communes_1demiJ_1, {
+        map.createPane('pane_2023_Communes_1demiJ_2');
+        map.getPane('pane_2023_Communes_1demiJ_2').style.zIndex = 402;
+        map.getPane('pane_2023_Communes_1demiJ_2').style['mix-blend-mode'] = 'normal';
+        var layer_2023_Communes_1demiJ_2 = new L.geoJson(json_2023_Communes_1demiJ_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_2023_Communes_1demiJ_1',
-            layerName: 'layer_2023_Communes_1demiJ_1',
-            pane: 'pane_2023_Communes_1demiJ_1',
-            onEachFeature: pop_2023_Communes_1demiJ_1,
-            style: style_2023_Communes_1demiJ_1_0,
+            dataVar: 'json_2023_Communes_1demiJ_2',
+            layerName: 'layer_2023_Communes_1demiJ_2',
+            pane: 'pane_2023_Communes_1demiJ_2',
+            onEachFeature: pop_2023_Communes_1demiJ_2,
+            style: style_2023_Communes_1demiJ_2_0,
         });
-        bounds_group.addLayer(layer_2023_Communes_1demiJ_1);
-        map.addLayer(layer_2023_Communes_1demiJ_1);
-        function pop_2023_ZD_TRELOU_DemiJ_2(feature, layer) {
-            layer.on({
-                mouseout: function(e) {
-                    for (i in e.target._eventParents) {
-                        e.target._eventParents[i].resetStyle(e.target);
-                    }
-                },
-                mouseover: highlightFeature,
-            });
-            var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['demi-J'] !== null ? autolinker.link(feature.properties['demi-J'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
-                    </tr>\
-                </table>';
-            layer.bindPopup(popupContent, {maxHeight: 400});
-        }
-
-        function style_2023_ZD_TRELOU_DemiJ_2_0(feature) {
-            switch(String(feature.properties['nom'])) {
-                case 'BARZY':
-                    return {
-                pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-                opacity: 1,
-                color: 'rgba(232,166,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                case 'PASSY':
-                    return {
-                pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-                opacity: 1,
-                color: 'rgba(60,229,219,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                case 'TRELOU (Chassins)':
-                    return {
-                pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-                opacity: 1,
-                color: 'rgba(228,228,228,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                case 'TRELOU - PASSY':
-                    return {
-                pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-                opacity: 1,
-                color: 'rgba(222,35,232,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-                case 'TRELOU (Village)':
-                    return {
-                pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-                opacity: 1,
-                color: 'rgba(81,232,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 3.0, 
-                fillOpacity: 0,
-                interactive: true,
-            }
-                    break;
-            }
-        }
-        map.createPane('pane_2023_ZD_TRELOU_DemiJ_2');
-        map.getPane('pane_2023_ZD_TRELOU_DemiJ_2').style.zIndex = 402;
-        map.getPane('pane_2023_ZD_TRELOU_DemiJ_2').style['mix-blend-mode'] = 'normal';
-        var layer_2023_ZD_TRELOU_DemiJ_2 = new L.geoJson(json_2023_ZD_TRELOU_DemiJ_2, {
-            attribution: '',
-            interactive: true,
-            dataVar: 'json_2023_ZD_TRELOU_DemiJ_2',
-            layerName: 'layer_2023_ZD_TRELOU_DemiJ_2',
-            pane: 'pane_2023_ZD_TRELOU_DemiJ_2',
-            onEachFeature: pop_2023_ZD_TRELOU_DemiJ_2,
-            style: style_2023_ZD_TRELOU_DemiJ_2_0,
-        });
-        bounds_group.addLayer(layer_2023_ZD_TRELOU_DemiJ_2);
-        map.addLayer(layer_2023_ZD_TRELOU_DemiJ_2);
+        bounds_group.addLayer(layer_2023_Communes_1demiJ_2);
+        map.addLayer(layer_2023_Communes_1demiJ_2);
         function pop_2023_ZD_REUIL_DemiJ_3(feature, layer) {
             layer.on({
                 mouseout: function(e) {
@@ -364,7 +304,7 @@
                     return {
                 pane: 'pane_2023_ZD_DORMANS_DemiJ_4',
                 opacity: 1,
-                color: 'rgba(207,229,11,1.0)',
+                color: 'rgba(228,60,60,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
@@ -431,11 +371,11 @@
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
-                color: 'rgba(194,124,244,1.0)',
+                color: 'rgba(244,178,232,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -448,7 +388,7 @@
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -461,7 +401,7 @@
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -483,11 +423,11 @@
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
-                color: 'rgba(60,229,219,1.0)',
+                color: 'rgba(28,245,216,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -496,11 +436,11 @@
                     return {
                 pane: 'pane_2023_ZD_CdB_DemiJ_5',
                 opacity: 1,
-                color: 'rgba(229,11,160,1.0)',
+                color: 'rgba(245,28,31,1.0)',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                weight: 2.0, 
+                weight: 3.0, 
                 fillOpacity: 0,
                 interactive: true,
             }
@@ -547,6 +487,168 @@
         });
         bounds_group.addLayer(layer_2023_ZD_CdB_DemiJ_5);
         map.addLayer(layer_2023_ZD_CdB_DemiJ_5);
+        function pop_2023_ZD_TRELOU_DemiJ_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['nom'] !== null ? autolinker.link(feature.properties['nom'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['demi-J'] !== null ? autolinker.link(feature.properties['demi-J'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Date'] !== null ? autolinker.link(feature.properties['Date'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2023_ZD_TRELOU_DemiJ_6_0(feature) {
+            switch(String(feature.properties['q2wHide_Prosp_J'])) {
+                case '1':
+                    return {
+                pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+                opacity: 1,
+                color: 'rgba(60,229,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+                opacity: 1,
+                color: 'rgba(217,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+                opacity: 1,
+                color: 'rgba(189,189,189,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+                opacity: 1,
+                color: 'rgba(60,120,228,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+                opacity: 1,
+                color: 'rgba(229,182,54,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_2023_ZD_TRELOU_DemiJ_6');
+        map.getPane('pane_2023_ZD_TRELOU_DemiJ_6').style.zIndex = 406;
+        map.getPane('pane_2023_ZD_TRELOU_DemiJ_6').style['mix-blend-mode'] = 'normal';
+        var layer_2023_ZD_TRELOU_DemiJ_6 = new L.geoJson(json_2023_ZD_TRELOU_DemiJ_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_2023_ZD_TRELOU_DemiJ_6',
+            layerName: 'layer_2023_ZD_TRELOU_DemiJ_6',
+            pane: 'pane_2023_ZD_TRELOU_DemiJ_6',
+            onEachFeature: pop_2023_ZD_TRELOU_DemiJ_6,
+            style: style_2023_ZD_TRELOU_DemiJ_6_0,
+        });
+        bounds_group.addLayer(layer_2023_ZD_TRELOU_DemiJ_6);
+        map.addLayer(layer_2023_ZD_TRELOU_DemiJ_6);
+        function pop_Point_RDV_ZD_2023_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lieu_RdV'] !== null ? autolinker.link(feature.properties['Lieu_RdV'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Commune'] !== null ? autolinker.link(feature.properties['Commune'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Point_RDV_ZD_2023_7_0() {
+            return {
+                pane: 'pane_Point_RDV_ZD_2023_7',
+                radius: 5.6,
+                opacity: 1,
+                color: 'rgba(35,246,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(228,35,35,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Point_RDV_ZD_2023_7');
+        map.getPane('pane_Point_RDV_ZD_2023_7').style.zIndex = 407;
+        map.getPane('pane_Point_RDV_ZD_2023_7').style['mix-blend-mode'] = 'normal';
+        var layer_Point_RDV_ZD_2023_7 = new L.geoJson(json_Point_RDV_ZD_2023_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Point_RDV_ZD_2023_7',
+            layerName: 'layer_Point_RDV_ZD_2023_7',
+            pane: 'pane_Point_RDV_ZD_2023_7',
+            onEachFeature: pop_Point_RDV_ZD_2023_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_Point_RDV_ZD_2023_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Point_RDV_ZD_2023_7);
+        map.addLayer(layer_Point_RDV_ZD_2023_7);
         map.on("zoomend", function(e) {
             if (map.getZoom() <= 19 && map.getZoom() >= 9) {
                 map.addLayer(layer_GoogleSatellite_0);
@@ -566,7 +668,7 @@
                 return this._div;
             };
             title.update = function () {
-                this._div.innerHTML = '<h2>Campagne prospections obligatoires 2023 - Planning prévisionnel</h2>';
+                this._div.innerHTML = '<h2>Prospections obligatoires ZD 2023 - Planning arrêté au 18 août</h2>';
             };
             title.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
@@ -581,38 +683,12 @@
         .title += 'Search for a place';
         setBounds();
         var i = 0;
-        layer_2023_Communes_1demiJ_1.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['aoc_nom'] !== null?String('<div style="color: #e6e6e6; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['aoc_nom']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_Communes_1demiJ_1'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        var i = 0;
-        layer_2023_ZD_TRELOU_DemiJ_2.eachLayer(function(layer) {
-            var context = {
-                feature: layer.feature,
-                variables: {}
-            };
-            layer.bindTooltip((layer.feature.properties['nom'] !== null?String('<div style="color: #e6e6e6; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['nom']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_TRELOU_DemiJ_2'});
-            labels.push(layer);
-            totalMarkers += 1;
-              layer.added = true;
-              addLabel(layer, i);
-              i++;
-        });
-        var i = 0;
         layer_2023_ZD_REUIL_DemiJ_3.eachLayer(function(layer) {
             var context = {
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['PLO'] !== null?String('<div style="color: #e2e2e2; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['PLO']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_REUIL_DemiJ_3'});
+            layer.bindTooltip((layer.feature.properties['Date'] !== null?String('<div style="color: #e2e2e2; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Date']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_REUIL_DemiJ_3'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -625,7 +701,7 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['nom'] !== null?String('<div style="color: #e2e2e2; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['nom']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_DORMANS_DemiJ_4'});
+            layer.bindTooltip((layer.feature.properties['Date'] !== null?String('<div style="color: #e2e2e2; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Date']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_DORMANS_DemiJ_4'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
@@ -638,22 +714,22 @@
                 feature: layer.feature,
                 variables: {}
             };
-            layer.bindTooltip((layer.feature.properties['nom'] !== null?String('<div style="color: #e6e6e6; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['nom']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_CdB_DemiJ_5'});
+            layer.bindTooltip((layer.feature.properties['Date'] !== null?String('<div style="color: #e6e6e6; font-size: 10pt; font-family: \'Open Sans\', sans-serif;">' + layer.feature.properties['Date']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_2023_ZD_CdB_DemiJ_5'});
             labels.push(layer);
             totalMarkers += 1;
               layer.added = true;
               addLabel(layer, i);
               i++;
         });
-        resetLabels([layer_2023_Communes_1demiJ_1,layer_2023_ZD_TRELOU_DemiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
+        resetLabels([layer_2023_Communes_1demiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
         map.on("zoomend", function(){
-            resetLabels([layer_2023_Communes_1demiJ_1,layer_2023_ZD_TRELOU_DemiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
+            resetLabels([layer_2023_Communes_1demiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
         });
         map.on("layeradd", function(){
-            resetLabels([layer_2023_Communes_1demiJ_1,layer_2023_ZD_TRELOU_DemiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
+            resetLabels([layer_2023_Communes_1demiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
         });
         map.on("layerremove", function(){
-            resetLabels([layer_2023_Communes_1demiJ_1,layer_2023_ZD_TRELOU_DemiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
+            resetLabels([layer_2023_Communes_1demiJ_2,layer_2023_ZD_REUIL_DemiJ_3,layer_2023_ZD_DORMANS_DemiJ_4,layer_2023_ZD_CdB_DemiJ_5]);
         });
         </script>
     </body>
